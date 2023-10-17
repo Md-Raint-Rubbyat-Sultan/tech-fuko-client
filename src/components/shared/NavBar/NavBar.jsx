@@ -25,20 +25,26 @@ const NavBar = () => {
             <ul className={`absolute bg-white lg:bg-transparent p-4 lg:p-0 lg:static text-xl text-[#FA2] font-kurale space-y-3 lg:space-y-6 lg:w-3/4 xl:w-1/2 lg:mx-auto border lg:border-0 rounded top-14 duration-700 z-50 ${showMenu ? "left-2" : "-left-96"}`}>
                 <li>
                     <NavLink className={({ isActive, isPending }) =>
-                        isPending ? "pending" : isActive ? "underline" : ""
+                        isPending ? "pending" : isActive ? "underline" : "hover:underline"
                     } to={'/'}>Home</NavLink>
                 </li>
                 <li>
-                    <NavLink to={'/add-product'}>Add Product</NavLink>
+                    <NavLink className={({ isActive, isPending }) =>
+                        isPending ? "pending" : isActive ? "underline" : "hover:underline"
+                    } to={'/add-product'}>Add Product</NavLink>
                 </li>
                 <li>
-                    <NavLink to={'/my-cart'}>My Cart</NavLink>
+                    <NavLink className={({ isActive, isPending }) =>
+                        isPending ? "pending" : isActive ? "underline" : "hover:underline"
+                    } to={'/my-cart'}>My Cart</NavLink>
                 </li>
                 <li>
-                    <NavLink to={'/sign-in'}>Sign In</NavLink>
+                    <NavLink className={({ isActive, isPending }) =>
+                        isPending ? "pending" : isActive ? "underline" : "hover:underline"
+                    } to={'/sign-in'}>Sign In</NavLink>
                 </li>
                 <li>
-                    <Link>Sign Out</Link>
+                    <Link className="hover:underline">Sign Out</Link>
                 </li>
             </ul>
         </nav>
