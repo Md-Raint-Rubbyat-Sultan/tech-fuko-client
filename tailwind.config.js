@@ -8,6 +8,10 @@ export default {
   ],
   theme: {
     extend: {},
+    fontFamily: {
+      raleway: "'Raleway', sans-serif",
+      kurale: "'Kurale', serif",
+    }
   },
   plugins: [daisyui],
   daisyui: {
