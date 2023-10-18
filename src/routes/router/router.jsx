@@ -6,6 +6,7 @@ import AddProducts from "../../pages/AddProducts/AddProducts";
 import MyCart from "../../pages/MyCart/MyCart";
 import SignIn from "../../pages/SignIn/SignIn";
 import SignUp from "../../pages/SignUp/SignUp";
+import BrandAllProducts from "../../pages/BrandAllProducts/BrandAllProducts";
 
 export const router = createBrowserRouter([
     {
@@ -19,8 +20,14 @@ export const router = createBrowserRouter([
                 loader: async () => await fetch("http://localhost:5000/brands")
             },
             {
+                path: '/brand-products/:brand',
+                element: <BrandAllProducts />,
+                loader: async ({ params }) => await fetch(`http://localhost:5000/products/${params?.brand}`)
+            },
+            {
                 path: '/add-product',
-                element: <AddProducts />
+                element: <AddProducts />,
+                loader: async () => await fetch("http://localhost:5000/brands")
             },
             {
                 path: '/my-cart',

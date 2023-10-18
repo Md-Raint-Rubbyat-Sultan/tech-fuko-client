@@ -1,10 +1,22 @@
 import { Link, NavLink } from "react-router-dom";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { useState } from "react";
+import { useContext } from "react";
+import { AuthContext } from "../../../providers/AuthProvider";
+import { toast } from "react-hot-toast";
 
 // flex lg:flex-col items-center lg:items-start justify-center gap-10
 const NavBar = () => {
+    const { user, signOutUser } = useContext(AuthContext);
     const [showMenu, setShowMenu] = useState(() => false);
+
+    const handelSignOut = () => {
+        signOutUser()
+            .then(() => {
+                toast.success("Sign Out Successful.");
+            })
+            .catch((er) => toast.error(er.message));
+    }
 
     return (
         <nav className="relative p-2 lg:p-0 lg:py-10" style={{
@@ -38,14 +50,18 @@ const NavBar = () => {
                         isPending ? "pending" : isActive ? "underline" : "hover:underline"
                     } to={'/my-cart'}>My Cart</NavLink>
                 </li>
-                <li>
-                    <NavLink className={({ isActive, isPending }) =>
-                        isPending ? "pending" : isActive ? "underline" : "hover:underline"
-                    } to={'/sign-in'}>Sign In</NavLink>
-                </li>
-                <li>
-                    <Link className="hover:underline">Sign Out</Link>
-                </li>
+                {
+                    user ?
+                        <li>
+                            <Link onClick={handelSignOut} className="hover:underline">Sign Out</Link>
+                        </li>
+                        :
+                        <li>
+                            <NavLink className={({ isActive, isPending }) =>
+                                isPending ? "pending" : isActive ? "underline" : "hover:underline"
+                            } to={'/sign-in'}>Sign In</NavLink>
+                        </li>
+                }
             </ul>
         </nav>
     );

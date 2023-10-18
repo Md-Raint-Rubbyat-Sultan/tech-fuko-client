@@ -8,7 +8,6 @@ import BrandCards from "../../components/BrandCards/BrandCards";
 
 const Home = () => {
     const allBrands = useLoaderData();
-    console.log(allBrands);
 
     return (
         <div>
