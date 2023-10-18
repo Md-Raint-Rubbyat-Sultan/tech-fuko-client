@@ -8,7 +8,7 @@ const Error = () => {
         <div>
             <Header />
             <div className="text-center text-[#FA2] my-12 text-4xl font-kurale">
-                <Link>&larr; Back to home</Link>
+                <Link className="hover:underline" to={'/'} >&larr; Back to home</Link>
             </div>
             <figure>
                 <img className="w-full md:w-3/4 lg:w-1/2 mx-auto" src={errorPhoto} alt="404" />
