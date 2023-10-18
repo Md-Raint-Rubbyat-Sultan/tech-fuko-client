@@ -7,6 +7,7 @@ import MyCart from "../../pages/MyCart/MyCart";
 import SignIn from "../../pages/SignIn/SignIn";
 import SignUp from "../../pages/SignUp/SignUp";
 import BrandAllProducts from "../../pages/BrandAllProducts/BrandAllProducts";
+import ViewAllProducts from "../../pages/ViewAllProducts/ViewAllProducts";
 
 export const router = createBrowserRouter([
     {
@@ -18,6 +19,11 @@ export const router = createBrowserRouter([
                 path: '/',
                 element: <Home />,
                 loader: async () => await fetch("http://localhost:5000/brands")
+            },
+            {
+                path: '/all-products',
+                element: <ViewAllProducts />,
+                loader: async () => await fetch("http://localhost:5000/products")
             },
             {
                 path: '/brand-products/:brand',

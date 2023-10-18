@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import { useCallback } from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 
 const HomeImageCarousel = ({ brands }) => {
@@ -26,7 +27,7 @@ const HomeImageCarousel = ({ brands }) => {
             <div className='flex-1 space-y-4 p-4'>
                 <h3 className='text-3xl font-kurale'>All Products</h3>
                 <p>Click view all button bellow to see all of our products.</p>
-                <button className='px-4 py-2 bg-[#FA2] rounded'>View all</button>
+                <Link to={'/all-products'} className='inline-block px-4 py-2 bg-[#FA4] rounded-md font-kurale font-bold text-xl text-white border-2 border-[#FA4] hover:text-black hover:bg-white cursor-pointer'>View all</Link>
             </div>
         </div>
     );
