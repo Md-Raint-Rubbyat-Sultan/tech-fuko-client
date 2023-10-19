@@ -31,7 +31,7 @@ const Home = () => {
             <HomeImageCarousel brands={allBrands} />
             {/* brand cards */}
             <div className="my-12">
-                <h3 className="text-3xl font-semibold text-center mb-6">Available Brands</h3>
+                <h3 className="text-3xl text-[#FA2] font-semibold text-center mb-6">Available Brands</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 px-6 overflow-hidden">
                 {
                     allBrands.map((brand) => <BrandCards key={brand?._id} brand={brand} />)
