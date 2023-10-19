@@ -3,15 +3,18 @@ import { Link } from 'react-router-dom';
 
 
 const ProductCard = ({ product }) => {
-    const { _id, productName, price, rate, photo } = product;
+    const { _id, productName, brandName, type, price, details, rate, photo } = product;
     return (
         <div className="card card-side bg-base-100 shadow-xl flex-col md:flex-row items-center">
-            <figure className='md:w-2/5'>
+            <figure className='md:w-1/2 md:h-full'>
                 <img className='w-full h-72 rounded-2xl md:rounded-none' src={photo} alt={productName} />
             </figure>
             <div className="card-body">
                 <h2 className="card-title">{productName}</h2>
-                <p>Price: ${price}</p>
+                <p className="font-semibold">Brand: {brandName}</p>
+                    <p className="font-semibold">Type: {type}</p>
+                    <p><span className="font-semibold">Description:</span> {details.slice(0,150)}...</p>
+                    <p className="font-semibold">Price: ${price}</p>
                 <div className="rating mb-6">
                     <input type="radio" name={`rating-${_id}`} className="mask mask-star" checked={(rate > 0 && rate <= 1) ? true : false} />
                     <input type="radio" name={`rating-${_id}`} className="mask mask-star" checked={(rate > 1 && rate <= 2) ? true : false} />

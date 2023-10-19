@@ -62,6 +62,16 @@ const NavBar = () => {
                             } to={'/sign-in'}>Sign In</NavLink>
                         </li>
                 }
+                <li>
+                    <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                        <div className="w-10 rounded-full">
+                            <img src={user?.photoURL ? user?.photoURL : "https://i.ibb.co/jJf2wWF/user.png"} alt="user profile picture" />
+                        </div>
+                    </label>
+                </li>
+                {
+                    user?.displayName && <li className="text-black">{user.displayName}</li>
+                }
             </ul>
         </nav>
     );

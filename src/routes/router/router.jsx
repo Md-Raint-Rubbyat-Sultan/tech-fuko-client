@@ -10,6 +10,7 @@ import BrandAllProducts from "../../pages/BrandAllProducts/BrandAllProducts";
 import ViewAllProducts from "../../pages/ViewAllProducts/ViewAllProducts";
 import UpdateProduct from "../../pages/UpdateProduct/UpdateProduct";
 import ProductDetails from "../../pages/ProductDetails/ProductDetails";
+import PrivetRoute from "../PrivetRoute/PrivetRoute";
 
 export const router = createBrowserRouter([
     {
@@ -34,22 +35,22 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/update-products/:id',
-                element: <UpdateProduct />,
+                element: <PrivetRoute><UpdateProduct /></PrivetRoute>,
                 loader: async ({ params }) => await fetch(`https://tech-fuko-server.vercel.app/single-products/${params?.id}`)
             },
             {
                 path: '/products-details/:id',
-                element: <ProductDetails />,
+                element: <PrivetRoute><ProductDetails /></PrivetRoute>,
                 loader: async ({ params }) => await fetch(`https://tech-fuko-server.vercel.app/single-products/${params?.id}`)
             },
             {
                 path: '/add-product',
-                element: <AddProducts />,
+                element: <PrivetRoute><AddProducts /></PrivetRoute>,
                 loader: async () => await fetch("https://tech-fuko-server.vercel.app/brands")
             },
             {
                 path: '/my-cart',
-                element: <MyCart />,
+                element: <PrivetRoute><MyCart /></PrivetRoute>,
                 loader: async () => {
                     const resOfProduct = await fetch('https://tech-fuko-server.vercel.app/products');
                     const productData = await resOfProduct.json();

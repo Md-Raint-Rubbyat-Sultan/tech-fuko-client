@@ -12,7 +12,7 @@ const PrivetRoute = ({ children }) => {
         return <Spinner />
     }
     if (user) return children;
-    return <Navigate to={'/'} state={location?.pathname} />
+    return <Navigate to={'/sign-in'} state={location?.pathname} />
 };
 
 PrivetRoute.propTypes = {

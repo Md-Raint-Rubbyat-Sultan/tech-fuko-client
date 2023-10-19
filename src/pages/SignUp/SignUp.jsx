@@ -3,7 +3,7 @@ import HelmetTitle from "../../components/HelmetTitle/HelmetTitle";
 import { useRef } from "react";
 import { useState } from "react";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import { AuthContext } from "../../providers/AuthProvider";
 
@@ -11,13 +11,13 @@ const SignUp = () => {
     const { createUser, updateUserProfile, setLoading } = useContext(AuthContext);
     const [showPass, setShowPass] = useState(() => false);
     const addRef = useRef(null);
-    const location = useLocation();
-    const navigate = useNavigate();
+    const currentLocation = useLocation();
 
     const handelSignUp = (e) => {
         e.preventDefault();
         const form = e.target;
         const name = form.name.value;
+        const photo = form.photo.value;
         const email = form.email.value;
         const password = form.password.value;
 
@@ -35,10 +35,10 @@ const SignUp = () => {
 
         createUser(email, password)
             .then(() => {
-                updateUserProfile({ displayName: name })
+                updateUserProfile({ displayName: name, photoURL: photo })
                     .then(() => {
                         toast.success("Sign up successful.");
-                        navigate(location?.state || '/');
+                        window.location.replace(currentLocation?.state || '/');
                     })
                     .catch((er) => toast.error(er.message))
             })
@@ -63,7 +63,11 @@ const SignUp = () => {
                 <form onSubmit={handelSignUp} className="space-y-6">
                     <div className="flex flex-col">
                         <label htmlFor="name">Name</label>
-                        <input ref={addRef} className="border px-2 py-3 rounded-md" type="name" name="name" id="name" placeholder="Enter product name" required />
+                        <input ref={addRef} className="border px-2 py-3 rounded-md" type="text" name="name" id="name" placeholder="Enter product name" required />
+                    </div>
+                    <div className="flex flex-col">
+                        <label htmlFor="photo">Photo URl</label>
+                        <input className="border px-2 py-3 rounded-md" type="text" name="photo" id="photo" placeholder="Enter product photo url" />
                     </div>
                     <div className="flex flex-col">
                         <label htmlFor="email">Email</label>
