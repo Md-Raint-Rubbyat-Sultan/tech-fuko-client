@@ -39,7 +39,7 @@ const AddProducts = () => {
             rate,
             photo
         }
-        console.log(productInfo);
+        // console.log(productInfo);
 
         // post data
         try {

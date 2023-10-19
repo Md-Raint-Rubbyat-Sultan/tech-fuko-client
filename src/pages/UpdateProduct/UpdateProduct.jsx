@@ -41,7 +41,7 @@ const UpdateProduct = () => {
             rate,
             photo
         }
-        console.log(productInfo);
+        // console.log(productInfo);
 
         // post data
         try {
@@ -55,7 +55,7 @@ const UpdateProduct = () => {
             const feedback = await res.json();
 
             if (feedback?.acknowledged) {
-                toast.success("Post successful.");
+                toast.success("Update successful.");
             }
         } catch (er) {
             toast.error(er.message);

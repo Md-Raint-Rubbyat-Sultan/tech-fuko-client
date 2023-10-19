@@ -36,7 +36,7 @@ const MyCart = () => {
             confirmButtonText: 'Yes, delete it!'
         }).then(async (result) => {
             if (result.isConfirmed) {
-                console.log(id);
+                // console.log(id);
                 try {
                     const res = await fetch(`https://tech-fuko-server.vercel.app/cart-products/${id}`, {
                         method: "DELETE"
