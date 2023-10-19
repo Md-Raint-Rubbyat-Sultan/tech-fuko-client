@@ -4,7 +4,7 @@ import ProductCard from "../../components/ProductCard/ProductCard";
 
 const ViewAllProducts = () => {
     const allProducts = useLoaderData();
-    console.log(allProducts);
+    // console.log(allProducts);
     return (
         <div>
             <HelmetTitle title="View-All-Products" />

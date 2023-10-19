@@ -6,8 +6,9 @@ import HelmetTitle from "../../components/HelmetTitle/HelmetTitle";
 
 const UpdateProduct = () => {
     const singleProduct = useLoaderData();
-    console.log(singleProduct);
+    const { _id, productName, brandName, type, price, details, rate, photo } = singleProduct;
     const [brands, setBrands] = useState(() => []);
+    const [selectBrand, setSelectBrand] = useState(() => brandName);
     const addRef = useRef(null);
 
     const handelAddProduct = async (e) => {
@@ -41,7 +42,7 @@ const UpdateProduct = () => {
 
         // post data
         try {
-            const res = await fetch(`http://localhost:5000/single-products/:id`, {
+            const res = await fetch(`http://localhost:5000/single-products/${_id}`, {
                 method: "PUT",
                 headers: {
                     "content-type": "application/json",
@@ -52,7 +53,6 @@ const UpdateProduct = () => {
 
             if (feedback?.acknowledged) {
                 toast.success("Post successful.");
-                form.reset();
             }
         } catch (er) {
             toast.error(er.message);
@@ -89,12 +89,12 @@ const UpdateProduct = () => {
                 <form onSubmit={handelAddProduct} className="space-y-6">
                     <div className="flex flex-col">
                         <label htmlFor="name">Product Name</label>
-                        <input ref={addRef} className="border px-2 py-3 rounded-md" type="text" name="name" id="name" placeholder="Enter product name" required />
+                        <input ref={addRef} className="border px-2 py-3 rounded-md" type="text" name="name" defaultValue={productName} id="name" placeholder="Enter product name" required />
                     </div>
                     <div className="flex flex-col gap-6 lg:flex-row">
                         <div className="flex flex-col flex-1">
                             <label htmlFor="brand-name">Brand Name</label>
-                            <select className="border px-2 py-3 rounded-md" name="brandName" id="brand-name" required>
+                            <select className="border px-2 py-3 rounded-md" name="brandName" value={selectBrand} onChange={(e) => setSelectBrand(() => e.target.value)} id="brand-name" required>
                                 {
                                     brands.map((brand) => <option key={brand?._id}>{brand?.brandName}</option>)
                                 }
@@ -103,24 +103,24 @@ const UpdateProduct = () => {
                         </div>
                         <div className="flex flex-col flex-1">
                             <label htmlFor="type">Product Type</label>
-                            <input className="border px-2 py-3 rounded-md" type="text" name="type" id="type" placeholder="Enter product type" required />
+                            <input className="border px-2 py-3 rounded-md" type="text" name="type" defaultValue={type} id="type" placeholder="Enter product type" required />
                         </div>
                     </div>
                     <div className="flex flex-col">
                         <label htmlFor="price">Price</label>
-                        <input className="border px-2 py-3 rounded-md" type="text" name="price" id="price" placeholder="$ Price" required />
+                        <input className="border px-2 py-3 rounded-md" type="text" name="price" defaultValue={price} id="price" placeholder="$ Price" required />
                     </div>
                     <div className="flex flex-col">
                         <label htmlFor="details">Short Description</label>
-                        <input className="border px-2 py-3 rounded-md" type="text" name="details" id="details" placeholder="Enter product Details" required />
+                        <input className="border px-2 py-3 rounded-md" type="text" name="details" defaultValue={details} id="details" placeholder="Enter product Details" required />
                     </div>
                     <div className="flex flex-col">
                         <label htmlFor="rating">Rating</label>
-                        <input className="border px-2 py-3 rounded-md" type="text" name="rate" id="rating" placeholder="Ratings" required />
+                        <input className="border px-2 py-3 rounded-md" type="text" name="rate" defaultValue={rate} id="rating" placeholder="Ratings" required />
                     </div>
                     <div className="flex flex-col">
                         <label htmlFor="photo">Photo URL</label>
-                        <input className="border px-2 py-3 rounded-md" type="text" name="photo" id="photo" placeholder="Enter Photo URL" required />
+                        <input className="border px-2 py-3 rounded-md" type="text" name="photo" defaultValue={photo} id="photo" placeholder="Enter Photo URL" required />
                     </div>
                     <div className="flex flex-col">
                         <input className="py-2 bg-[#FA4] rounded-md font-kurale font-bold text-xl text-white border-2 border-[#FA4] hover:text-black hover:bg-white cursor-pointer" type="submit" value="Update Product" />

@@ -1,14 +1,18 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import HelmetTitle from "../../components/HelmetTitle/HelmetTitle";
 import { useRef } from "react";
 import { useState } from "react";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
+import { AuthContext } from "../../providers/AuthProvider";
 
 const SignUp = () => {
+    const { createUser, updateUserProfile, setLoading } = useContext(AuthContext);
     const [showPass, setShowPass] = useState(() => false);
     const addRef = useRef(null);
+    const location = useLocation();
+    const navigate = useNavigate();
 
     const handelSignUp = (e) => {
         e.preventDefault();
@@ -28,6 +32,18 @@ const SignUp = () => {
             return toast.error("password must contain at least one spacial character as ($, #, @, %, ^, & etc).")
         }
         console.log(name, email, password);
+
+        createUser(email, password)
+            .then(() => {
+                updateUserProfile({ displayName: name })
+                    .then(() => {
+                        toast.success("Sign up successful.");
+                        navigate(location?.state || '/');
+                    })
+                    .catch((er) => toast.error(er.message))
+            })
+            .catch((er) => toast.error(er.message))
+            .finally(() => setLoading(() => false))
     }
 
     useEffect(() => {

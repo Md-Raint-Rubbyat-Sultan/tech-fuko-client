@@ -1,13 +1,18 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import HelmetTitle from "../../components/HelmetTitle/HelmetTitle";
 import { useRef } from "react";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
+import { AuthContext } from "../../providers/AuthProvider";
 
 const SignIn = () => {
+    const { signInUser, signInWithGoogle, setLoading } = useContext(AuthContext);
     const [showPass, setShowPass] = useState(() => false);
     const addRef = useRef(null);
+    const location = useLocation();
+    const navigate = useNavigate();
 
     const handelSignIn = (e) => {
         e.preventDefault();
@@ -15,6 +20,24 @@ const SignIn = () => {
         const email = form.email.value;
         const password = form.password.value;
         console.log(email, password);
+
+        signInUser(email, password)
+            .then(() => {
+                toast.success("Sign in successful.");
+                navigate(location?.state || '/');
+            })
+            .catch((er) => toast.error(er.message))
+            .finally(() => setLoading(() => false))
+    }
+
+    const handelGoogleSignUp = () => {
+        signInWithGoogle()
+            .then(() => {
+                toast.success("SignUp successful.");
+                navigate(location?.state || '/');
+            })
+            .catch((er) => toast.error(er.message))
+            .finally(() => setLoading(() => false))
     }
 
     useEffect(() => {
@@ -23,7 +46,8 @@ const SignIn = () => {
             addRef.current.focus();
         }
         return () => mount = false;
-    }, [])
+    }, []);
+
     return (
         <div>
             <HelmetTitle title="Sign In" />
@@ -53,7 +77,11 @@ const SignIn = () => {
                     <div className="flex flex-col">
                         <input className="py-2 bg-[#FA4] rounded-md font-kurale font-bold text-xl text-white border-2 border-[#FA4] hover:text-black hover:bg-white cursor-pointer" type="submit" value="Sign In" />
                     </div>
-                    <p>Don&lsquo;t have an account? Please <Link to={"/sign-up"} className="font-kurale text-[#FA2]">Register</Link></p>
+                    <hr />
+                    <div className="flex flex-col">
+                        <input onClick={handelGoogleSignUp} className="py-2 bg-[#FA4] rounded-md font-kurale font-bold text-xl text-white border-2 border-[#FA4] hover:text-black hover:bg-white cursor-pointer" type="button" value="SignUp With Google" />
+                    </div>
+                    <p>Don&lsquo;t have an account? Please <Link state={location?.state} to={"/sign-up"} className="font-kurale text-[#FA2]">Register</Link></p>
                 </form>
             </div>
         </div>
