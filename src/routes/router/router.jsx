@@ -20,36 +20,43 @@ export const router = createBrowserRouter([
             {
                 path: '/',
                 element: <Home />,
-                loader: async () => await fetch("http://localhost:5000/brands")
+                loader: async () => await fetch("https://tech-fuko-server.vercel.app/brands")
             },
             {
                 path: '/all-products',
                 element: <ViewAllProducts />,
-                loader: async () => await fetch("http://localhost:5000/products")
+                loader: async () => await fetch("https://tech-fuko-server.vercel.app/products")
             },
             {
                 path: '/brand-products/:brand',
                 element: <BrandAllProducts />,
-                loader: async ({ params }) => await fetch(`http://localhost:5000/brand-products/${params?.brand}`)
+                loader: async ({ params }) => await fetch(`https://tech-fuko-server.vercel.app/brand-products/${params?.brand}`)
             },
             {
                 path: '/update-products/:id',
                 element: <UpdateProduct />,
-                loader: async ({ params }) => await fetch(`http://localhost:5000/single-products/${params?.id}`)
+                loader: async ({ params }) => await fetch(`https://tech-fuko-server.vercel.app/single-products/${params?.id}`)
             },
             {
                 path: '/products-details/:id',
                 element: <ProductDetails />,
-                loader: async ({ params }) => await fetch(`http://localhost:5000/single-products/${params?.id}`)
+                loader: async ({ params }) => await fetch(`https://tech-fuko-server.vercel.app/single-products/${params?.id}`)
             },
             {
                 path: '/add-product',
                 element: <AddProducts />,
-                loader: async () => await fetch("http://localhost:5000/brands")
+                loader: async () => await fetch("https://tech-fuko-server.vercel.app/brands")
             },
             {
                 path: '/my-cart',
-                element: <MyCart />
+                element: <MyCart />,
+                loader: async () => {
+                    const resOfProduct = await fetch('https://tech-fuko-server.vercel.app/products');
+                    const productData = await resOfProduct.json();
+                    const resOfCart = await fetch('https://tech-fuko-server.vercel.app/cart-products');
+                    const cartData = await resOfCart.json();
+                    return [productData, cartData];
+                }
             },
             {
                 path: '/sign-in',

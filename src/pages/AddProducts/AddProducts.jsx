@@ -24,9 +24,12 @@ const AddProducts = () => {
             return toast.error("Price must be a number!");
         }
         if ((typeof rate !== "number" || isNaN(rate))) {
-            return toast.error("Price must be a number!");
+            return toast.error("Rate must be a number!");
         }
-
+        if (rate < 0 || rate > 5) {
+            return toast.error("Rate must be a number getter than 0 and lower than 5!");
+        }
+        
         const productInfo = {
             productName,
             brandName,
@@ -40,7 +43,7 @@ const AddProducts = () => {
 
         // post data
         try {
-            const res = await fetch("http://localhost:5000/products", {
+            const res = await fetch("https://tech-fuko-server.vercel.app/products", {
                 method: "POST",
                 headers: {
                     "content-type": "application/json",

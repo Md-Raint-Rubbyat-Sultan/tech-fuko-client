@@ -31,7 +31,7 @@ const SignUp = () => {
         else if (!/[@#$%^&-+=()]/.test(password)) {
             return toast.error("password must contain at least one spacial character as ($, #, @, %, ^, & etc).")
         }
-        console.log(name, email, password);
+        // console.log(name, email, password);
 
         createUser(email, password)
             .then(() => {
