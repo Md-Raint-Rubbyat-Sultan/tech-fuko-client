@@ -38,7 +38,7 @@ const Home = () => {
                     }
                 </div>
             </div>
-            <div className="my-12">
+            <div className="my-12 px-4 md:px-6 lg:px-0 lg:w-3/4 mx-auto">
                 <h3 className="text-3xl text-[#FA2] font-semibold text-center mb-6">Most Asked Questions?</h3>
                 <div className="collapse collapse-arrow bg-base-200">
                     <input type="radio" name="my-accordion-2" checked="checked" />
