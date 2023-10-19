@@ -32,11 +32,32 @@ const Home = () => {
             {/* brand cards */}
             <div className="my-12">
                 <h3 className="text-3xl text-[#FA2] font-semibold text-center mb-6">Available Brands</h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 px-6 overflow-hidden">
-                {
-                    allBrands.map((brand) => <BrandCards key={brand?._id} brand={brand} />)
-                }
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 px-6 overflow-hidden">
+                    {
+                        allBrands.map((brand) => <BrandCards key={brand?._id} brand={brand} />)
+                    }
+                </div>
             </div>
+            <div className="my-12">
+                <h3 className="text-3xl text-[#FA2] font-semibold text-center mb-6">Most Asked Questions?</h3>
+                <div className="collapse collapse-arrow bg-base-200">
+                    <input type="radio" name="my-accordion-2" checked="checked" />
+                    <div className="collapse-title text-xl font-medium">
+                        Do you sell authentic products?
+                    </div>
+                    <div className="collapse-content">
+                        <p>Yes, of course. You can buy anything form us with total security.</p>
+                    </div>
+                </div>
+                <div className="collapse collapse-arrow bg-base-200">
+                    <input type="radio" name="my-accordion-2" />
+                    <div className="collapse-title text-xl font-medium">
+                        Do you provide official warranty?
+                    </div>
+                    <div className="collapse-content">
+                        <p>Without any doubt we provide official warranty.</p>
+                    </div>
+                </div>
             </div>
         </div>
     );
