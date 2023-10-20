@@ -38,7 +38,7 @@ const ProductDetails = () => {
     return (
         <div className="hero min-h-screen bg-base-200">
             <div className="hero-content flex-col items-center">
-                <img src={photo} alt={productName} className="max-w-sm md:max-w-lg rounded-lg shadow-2xl" />
+                <img src={photo} alt={productName} className="w-full md:max-w-lg rounded-lg shadow-2xl" />
                 <div className="mt-6">
                     <h1 className="text-5xl text-center font-bold">{productName}</h1>
                     <p className="text-center py-6 font-semibold">Brand: {brandName}</p>
